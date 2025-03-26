@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./style.css">
+    <script src="./script.js" defer></script>
 </head>
 <body>
     <div id="window1">
+        <div id="overlay">
+
+        </div>
     <div id="navigation-top">
         <div id="money-box">
             <img src="./img/nav-top/money.png" alt="money">
@@ -37,10 +41,11 @@
         <img src="./img/nav-left/rebirth.png" alt="spin">
     </div>
         <div id="block">
-            <img src="./img/lucky-blocks/default.png" alt="lucky-block">
+            <h1 id="rarity">Rarity</h1>
+            <img id="image-block" src="./img/lucky-blocks/default.png" alt="lucky-block">
         </div>
-    <div class="align">
-        <div id="roll-btn">ROLL !</div>
+    <div class="align">      
+        <div onclick="rollStart()" id="roll-btn">ROLL !</div>
     </div>
     <div class="align">
         <div id="navigation">
