@@ -27,11 +27,14 @@
 }
 
 #navigation-left{
+    align-items: center;
+    justify-content: center;
     position: absolute;
     top: var(--navigation-pos);
     display: flex;
     flex-direction: column;
 }
+
 #navigation-left img{
     width: 13vw;
     min-width: 48px;
@@ -87,4 +90,105 @@ body {
     font-size: 180%;
     font-weight: bold;
     display: flex;
+}
+
+#money-box{
+    margin-left: -3px;
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 50vw;
+    min-width: 100px;
+    max-width: 400px;
+    height: 10vw;
+    max-height: 50px;
+    min-height: 30px;
+    border-radius: 50px;
+    background-color: #D9D9D9;
+    border: 5px solid #000;
+}
+
+#money-box h1{
+    text-align: center;
+    font-size: 100%;
+}
+
+#money-box img{
+  margin-left: 20px;  
+  margin-right: 2px;  
+  width: 22%;
+  max-width: 50px;
+}
+
+#navigation-top{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    height: 20vw;
+}
+
+#bar-filled{
+    width: 200px;
+    height: 10px;
+    background-color: #d9d9d900;
+    border-radius: 50px;
+    margin: none;
+    border: 5px solid #000;
+}
+
+#level img{
+    max-width: 50px;
+    width: 22%;
+    position: absolute;
+    z-index: 200;
+}
+
+#level-box{
+    transform: scale(0.7);
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+#level{
+    position: fixed;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    right: -23px; 
+    top: 33px;
+}
+
+#level h2{
+    color: white;
+    -webkit-text-stroke: #000 2px;
+    position: relative;
+    bottom: 13px;
+    font-size: 20px;
+    font-weight: 1000;
+}
+
+#bar-empty{
+    position: absolute;
+    left: 5px;
+    width: 200px;
+    height: 10px;
+    border-radius: 50px;
+    background-color: #f2ff00;
+}
+
+#block{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#block img{
+    width: 40%;
+    max-width: 200px;
 }
