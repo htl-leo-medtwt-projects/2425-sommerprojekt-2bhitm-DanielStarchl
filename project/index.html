@@ -11,11 +11,88 @@
     <div id="window1">
         <div id="overlay">
 
+            
+
+
         </div>
+        <!--Stats-->
+        <div style="display: none;" id="stats-pop">
+        <div onclick="closeStats()" class="bg-filter"></div>
+        <div class="align-pop">
+            <div class="pop-up">
+                <img onclick="closeStats()" class="xcancel" src="./img/gui/X 2nd Outline 256px.png" alt="">
+                <h2>Stats</h2>
+                <br>
+                <hr>
+                <div class="stat-list">
+                    <div style="margin-top: 20px; margin-bottom: 6px;">
+                        <img src="./img/luck/luck.png" alt="luck">
+                        <h3 style="color: rgb(39, 202, 39);">Luck :</h3>
+                        <h3 style="position: absolute; right: 10px; color: white;" id="luck">1x</h3>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <img src="./img/luck/megaLuck.png" alt="megaluck">
+                        <h3 style="color: rgb(173, 92, 249);">MEGA Luck:</h3>
+                        <h3 style="position: absolute; right: 10px; color: white;" id="megaluck">1x</h3>
+                    </div>
+                    <hr>
+                    <div style="margin-top: 20px; margin-bottom: 6px;">
+                        <img src="./img/gui/dice.png" alt="dice">
+                        <h3 style="color: rgb(198, 203, 198);">All-Time Rolls:</h3>
+                        <h3 style="position: absolute; right: 10px; color: white;" id="rolls">0</h3>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <img src="./img/gui/goldenDice.png" alt="goldendice">
+                        <h3 style="color: rgb(246, 249, 92);">All-Time Lucky Rolls:</h3>
+                        <h3 style="position: absolute; right: 10px; color: white;" id="luckyrolls">0</h3>
+                    </div>
+                    <hr>
+                    <div style="margin-top: 20px;">
+                        <img src="./img/nav-left/rebirth.png" alt="rebirth">
+                        <h3 style="color: rgb(249, 92, 225);">Rebirths:</h3>
+                        <h3 style="position: absolute; right: 10px; color: white;" id="rebirths">0</h3>
+                    </div>
+
+                </div>
+                </div>
+            </div>
+        </div>
+            <!--calendar-->
+            <div style="display: none;" id="daily-pop">
+                <div onclick="closeCalendar()" class="bg-filter"></div>
+                <div class="align-pop">
+                    <div class="pop-up">
+                        <img onclick="closeCalendar()" class="xcancel" src="./img/gui/X 2nd Outline 256px.png" alt="">
+                        <h2>Daily Rewards</h2>
+                        <br>
+                        <hr>
+                        <div>
+        
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <!--spinning wheel-->
+                <div style="display: none;" id="spinning-pop">
+                    <div onclick="closeWheel()" class="bg-filter"></div>
+                    <div class="align-pop">
+                        <div class="pop-up">
+                            <img onclick="closeWheel()" class="xcancel" src="./img/gui/X 2nd Outline 256px.png" alt="">
+                            <h2>Spinning Wheel</h2>
+                            <br>
+                            <hr>
+                            <div>
+            
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+
     <div id="navigation-top">
         <div id="money-box">
             <img src="./img/nav-top/money.png" alt="money">
-            <h1>0</h1>
+            <h1 id="money">0</h1>
         </div>
         <div id="level">
             <div id="level-box">
@@ -31,14 +108,14 @@
     <div id="navigation-left">
         <img src="./img/nav-left/shopping-cart.png" alt="shop">
         <img src="./img/nav-left/settings.png" alt="settings">
-        <img src="./img/nav-left/stats.png" alt="stats">
-        <img src="./img/nav-left/daily-rewards.png" alt="daily-rewards">
-        <img src="./img/nav-left/spin.png" alt="spin">
+        <img onclick="openStats()" src="./img/nav-left/stats.png" alt="stats">
+        <img onclick="openCalendar()" src="./img/nav-left/daily-rewards.png" alt="daily-rewards">
+        <img onclick="openWheel()" src="./img/nav-left/spin.png" alt="spin">
     </div>
     <div id="navigation-right">
         <img src="./img/nav-left/quests.png" alt="quests">
-        <img src="./img/nav-left/upgrade.png" alt="stats">
-        <img src="./img/nav-left/rebirth.png" alt="spin">
+        <img src="./img/nav-left/upgrade.png" alt="boost">
+        <img src="./img/nav-left/rebirth.png" alt="rebirths">
     </div>
         <div id="block">
             <h1 id="rarity">Rarity</h1>
