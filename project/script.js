@@ -15,6 +15,7 @@ let money = 0
 
 // LVL 
 let lvl = 0
+let xp = 0;
 
 //Luck
 let luck = 1
@@ -78,11 +79,10 @@ function rollStart() {
 
     }
     setTimeout(() => {
-
+        if (value == 6) {
+            luckyrolls++
+        }
         for (let index = 0; index <= 6; index++) {
-            if (value == 6) {
-                luckyrolls++
-            }
             if (index == value) {
                 document.getElementById('rarity').innerHTML = rarity
                 document.getElementById('rarity').style.opacity = 1
@@ -100,10 +100,15 @@ function rollStart() {
             }, 2000);
         }
         console.log(money)
-        money = parseInt(money) + value + Math.pow(value, lvl)
+        xp += value * 60
+        lvl = xp / 1000
+        money += Math.ceil(parseInt(money) + value + Math.pow(value, lvl))
         moneyElem.innerHTML = money
         rolls++
+
         document.getElementById('luck').innerHTML = luck + "x"
+        document.getElementById('xp-count').innerHTML = xp + "/1000 XP"
+        document.getElementById('bar-empty').style.width = (xp/5) + "px"
         document.getElementById('megaluck').innerHTML = megaluck + "x"
         document.getElementById('rolls').innerHTML = rolls
         document.getElementById('luckyrolls').innerHTML = luckyrolls
@@ -157,8 +162,9 @@ function updateState() {
     if(state == 1){
         document.getElementById('spin-wheel').style.backgroundColor = `grey`
         document.getElementById('timer-wheel').innerHTML = (hoursLeft <= 9 ? "0" : "") + hoursLeft + ":" + (minutesLeft <= 9 ? "0" : "") + minutesLeft + ":" + (secondsLeft <= 9 ? "0" : "") + secondsLeft
-
+        
     }else{
+        document.getElementById('timer-wheel').innerHTML = ""
         document.getElementById('spin-wheel').style.backgroundColor = `#E8DA1B`
     }
 
@@ -170,3 +176,49 @@ function updateState() {
 
 setInterval(updateState, 1)
 
+
+ // Daily stuff
+
+ let dailyCounter = 1;
+ let claimed = false;
+ let claimstate =  0;
+ function claimDaily() {
+     if(claimstate == 0){
+     const currentDayElement = document.querySelector(`#daily-reward-grid div:nth-child(${dailyCounter})`);
+     if (currentDayElement) {
+         currentDayElement.style.backgroundColor = 'grey';
+     }
+     claimstate = 1;
+     dailyCounter++
+     claimed = true
+     if (dailyCounter > 9) {
+        for (let i = 1; i <= 9; i++) {
+        document.querySelector(`#daily-reward-grid div:nth-child(${i})`).style.backgroundColor = 'white';
+        }
+         dailyCounter = 1
+     }
+     document.getElementById('daily-claim').style.backgroundColor = 'grey';
+    }
+ }
+ 
+ function updateDailyState() {
+    const date = new Date();
+    let hoursLeft = 23 - date.getHours();
+    let minutesLeft = 59 - date.getMinutes();
+    let secondsLeft = 59 - date.getSeconds();
+    
+
+     if (claimed) {
+ 
+         if(hoursLeft >= 0 && minutesLeft >= 0 && secondsLeft >= 0){
+            document.getElementById('dailyrewards-cd').innerHTML = (hoursLeft <= 9 ? "0" : "") + hoursLeft + ":" + (minutesLeft <= 9 ? "0" : "") + minutesLeft + ":" + (secondsLeft <= 9 ? "0" : "") + secondsLeft;
+            document.getElementById('dailyrewards-cd').style.color = "lightgrey";
+     }else if(hoursLeft <= 0 && minutesLeft <= 0 && secondsLeft <= 0){
+        claimstate = 0
+        claimed = false;
+         document.getElementById('dailyrewards-cd').innerHTML = "Claim now!";
+         document.getElementById('daily-claim').style.backgroundColor = '#E8DA1B';
+     }
+    }
+}
+ setInterval(updateDailyState, 50)

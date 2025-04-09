@@ -203,7 +203,7 @@ body {
 #bar-empty{
     position: absolute;
     left: 5px;
-    width: 200px;
+    width: 0px;
     height: 10px;
     border-radius: 50px;
     background-color: #f2ff00;
@@ -335,7 +335,7 @@ body {
     width: 5px;
 }
 
-#spin-wheel{
+#spin-wheel , #daily-claim{
     justify-self: center;
     width: 160px;
     height: 30px;
@@ -345,4 +345,23 @@ body {
     border-radius: 300px;
     border: 5px solid #000;
     background-color: #E8DA1B;
+}
+
+
+
+#daily-reward-grid div{
+    display: grid;
+    width: 80px;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid;
+    border-radius: 20px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+}
+
+#daily-reward-grid img {
+    margin: auto auto;
+    max-width: 100%;
+    max-height: 100%;
 }
