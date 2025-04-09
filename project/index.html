@@ -8,7 +8,7 @@
     <script src="./script.js" defer></script>
 </head>
 <body>
-    <div id="window1">
+    <div id="window1" style="width: 100vw;">
         <div id="overlay">
     
             
@@ -174,10 +174,10 @@
     </div>
     <div class="align">
         <div id="navigation">
-            <img src="./img/nav/lucky.png" alt="lucky-block">
-            <img src="./img/nav/egg.png" alt="lucky-block">
+            <img onclick="location.hash='window1'" src="./img/nav/lucky.png" alt="lucky-block">
+            <img onclick="location.hash='window2'" src="./img/nav/egg.png" alt="lucky-block">
             <img src="./img/nav/backpack.png" alt="lucky-block">
-        <img src="./img/nav/sword.png" alt="lucky-block">
+            <img onclick="location.hash='window4'" src="./img/nav/sword.png" alt="lucky-block">
     </div>
 </div>
 </div>
@@ -185,7 +185,75 @@
 
 
 <!--WINDOW 2-->
-<div></div>
+<div id="window2" style=" position: absolute; top: 0; left: 2000px;" class="hidden">
+   <div id="shop-sign"><h1>PET SHOP</h1></div>
+   <div id="shop-bg">
+    <div class="egg-bg">
+        <div class="pricetag">
+            <h3>1000</h3>
+            <img src="./img/nav-top/money.png" alt="">
+        </div>
+        <img style="margin: -10px; width: 70px;" src="./img/eggs/egg1.png" alt="egg1">
+         <div class="egg-buy">
+        <h3>BUY !</h3>
+    </div>
+    </div>
+    <div class="egg-bg">
+        <div class="pricetag">
+            <h3>1000</h3>
+            <img src="./img/nav-top/money.png" alt="">
+        </div>
+        <img style="margin: -10px; width: 70px;" src="./img/eggs/egg2.png" alt="egg1">
+         <div class="egg-buy">
+        <h3>BUY !</h3>
+    </div>
+    </div>
+    <div class="egg-bg">
+        <div class="pricetag">
+            <h3>1000</h3>
+            <img src="./img/nav-top/money.png" alt="">
+        </div>
+        <img style="margin: -10px; width: 70px;" src="./img/eggs/egg3.png" alt="egg1">
+         <div class="egg-buy">
+        <h3>BUY !</h3>
+    </div>
+    </div>
+    <div class="egg-bg">
+        <div class="pricetag">
+            <h3>1000</h3>
+            <img src="./img/nav-top/money.png" alt="">
+        </div>
+        <img style="margin: -10px; width: 70px;" src="./img/eggs/egg4.png" alt="egg1">
+         <div class="egg-buy">
+        <h3>BUY !</h3>
+    </div>
+    </div>
+    <div class="egg-bg">
+        <div class="pricetag">
+            <h3>1000</h3>
+            <img src="./img/nav-top/money.png" alt="">
+        </div>
+        <img style="margin: -10px; width: 70px;" src="./img/eggs/egg5.png" alt="egg1">
+         <div class="egg-buy">
+        <h3>BUY !</h3>
+    </div>
+    </div>
+    <div class="egg-bg">
+        <div class="pricetag">
+            <h3>1000</h3>
+            <img src="./img/nav-top/money.png" alt="">
+        </div>
+        <img style="margin: -10px; width: 70px;" src="./img/eggs/egg6.png" alt="egg1">
+         <div class="egg-buy">
+        <h3>BUY !</h3>
+    </div>
+    </div>
+   </div>
 
+
+ <!--Window 4-->
+ <div id="window4">
+    <div id="skybox"></div>
+ </div>
 </body>
 </html>
