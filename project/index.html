@@ -9,12 +9,7 @@
 </head>
 <body>
     <div id="window1" style="width: 100vw;">
-        <div id="overlay">
-    
-            
-
-
-        </div>
+        <div id="overlay"></div>
         <!--Stats-->
         <div style="display: none;" id="stats-pop">
         <div onclick="closeStats()" class="bg-filter"></div>
@@ -172,13 +167,12 @@
     <div class="align">      
         <div onclick="rollStart()" id="roll-btn">ROLL !</div>
     </div>
-    <div class="align">
+    
         <div id="navigation">
             <img onclick="location.hash='window1'" src="./img/nav/lucky.png" alt="lucky-block">
             <img onclick="location.hash='window2'" src="./img/nav/egg.png" alt="lucky-block">
             <img src="./img/nav/backpack.png" alt="lucky-block">
             <img onclick="location.hash='window4'" src="./img/nav/sword.png" alt="lucky-block">
-    </div>
 </div>
 </div>
 
@@ -253,7 +247,12 @@
 
  <!--Window 4-->
  <div id="window4">
-    <div id="skybox"></div>
+    <div id="skybox">
+        <div class="align">
+        
+            <div id="explore-btn">EXPLORE !</div>
+        </div>
+    </div>
  </div>
 </body>
 </html>
