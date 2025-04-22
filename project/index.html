@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 , minimum-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./style.css">
     <script src="./script.js" defer></script>
 </head>
-<body>
+<body onload="generateInventory()">
     <div id="window1" style="width: 100vw;">
-        <div id="overlay"></div>
+        <div id="overlay">
+        </div>
         <!--Stats-->
         <div style="display: none;" id="stats-pop">
         <div onclick="closeStats()" class="bg-filter"></div>
@@ -167,12 +168,13 @@
     <div class="align">      
         <div onclick="rollStart()" id="roll-btn">ROLL !</div>
     </div>
-    
+    <div class="align">
         <div id="navigation">
             <img onclick="location.hash='window1'" src="./img/nav/lucky.png" alt="lucky-block">
             <img onclick="location.hash='window2'" src="./img/nav/egg.png" alt="lucky-block">
-            <img src="./img/nav/backpack.png" alt="lucky-block">
+            <img onclick="location.hash='window3'" src="./img/nav/backpack.png" alt="lucky-block">
             <img onclick="location.hash='window4'" src="./img/nav/sword.png" alt="lucky-block">
+    </div>
 </div>
 </div>
 
@@ -243,6 +245,16 @@
     </div>
     </div>
    </div>
+
+    <!--Window 3-->
+ <div id="window3">
+    <h1 style="text-align: center; margin-top: 70px; color: white;">Inventory</h1>
+    <div class="align">
+        <div id="inv-grid">
+            <div class="inv-bg"></div> 
+        </div>
+</div>
+ </div>
 
 
  <!--Window 4-->

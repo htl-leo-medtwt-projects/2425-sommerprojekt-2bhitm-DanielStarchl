@@ -207,6 +207,7 @@ setInterval(updateState, 1)
     let minutesLeft = 59 - date.getMinutes();
     let secondsLeft = 59 - date.getSeconds();
     
+    
 
      if (claimed) {
  
@@ -222,3 +223,15 @@ setInterval(updateState, 1)
     }
 }
  setInterval(updateDailyState, 50)
+
+
+ function generateInventory() {
+    let grid = document.getElementById('inv-grid');
+
+    for (let index = 0; index < 2; index++) {
+        grid.innerHTML += `<div class="inv-bg"></div>`;
+    }
+
+    document.body.appendChild(grid); 
+}
+generateInventory()
