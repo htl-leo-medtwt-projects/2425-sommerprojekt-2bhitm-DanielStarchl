@@ -12,6 +12,12 @@ html , body{
     overflow-x: hidden;
     scroll-behavior: smooth;
 }
+
+.sortable-ghost {
+    opacity: 0.6;
+    transform: scale(1.05);
+  }
+  
 #overlay{
     visibility: hidden;
     opacity: 0;
@@ -441,13 +447,15 @@ body {
 #shop-bg::-webkit-scrollbar {
     display: none;
 }
+#inv-grid::-webkit-scrollbar {
+    display: none;
+}
 
 #inv-grid{
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-    grid-template-columns: auto auto auto auto auto auto;
-    justify-self: center;
     background-color: rgba(150, 91, 91, 0.70);
     stroke-width: 6px;
     border-radius: 30px;

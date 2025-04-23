@@ -1,4 +1,51 @@
+new Sortable(document.getElementById('inv-grid'),{
+    animation: 150,
+    swap: true
+})
+
+// Items
+let items = [
+    {
+      "id": 1,
+      "name": "Health Potion",
+      "icon": "./img/potions/red.png",
+      "itemCount": 0
+    },
+    {
+      "id": 2,
+      "name": "Mana Potion",
+      "icon": "./img/potions/blue.png",
+      "itemCount": 0
+    },
+    {
+      "id": 3,
+      "name": "Mega Potion",
+      "icon": "./img/potions/mega.png",
+      "itemCount": 0
+    },
+    {
+      "id": 4,
+      "name": "Luck Potion",
+      "icon": "./img/potions/green.png",
+      "itemCount": 0
+    },
+    {
+      "id": 4,
+      "name": "Golden Dog",
+      "icon": "./img/Pets/golden-dog.png",
+      "itemCount": 0
+    },
+    {
+      "id": 5,
+      "name": "XP Potion",
+      "icon": "./img/potions/yellow.png",
+      "itemCount": 0
+    }
+  ]
+  
+
 // Deklarations Part
+
 
 let rng = 0
 let value = 0
@@ -228,10 +275,8 @@ setInterval(updateState, 1)
  function generateInventory() {
     let grid = document.getElementById('inv-grid');
 
-    for (let index = 0; index < 2; index++) {
+    for (let index = 0; index < 15; index++) {
         grid.innerHTML += `<div class="inv-bg"></div>`;
     }
-
-    document.body.appendChild(grid); 
 }
 generateInventory()
