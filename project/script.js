@@ -6,40 +6,40 @@ new Sortable(document.getElementById('inv-grid'),{
 // Items
 let items = [
     {
-      "id": 1,
+      "id": 0,
       "name": "Health Potion",
       "icon": "./img/potions/red.png",
       "itemCount": 0
     },
     {
-      "id": 2,
+      "id": 1,
       "name": "Mana Potion",
       "icon": "./img/potions/blue.png",
       "itemCount": 0
     },
     {
-      "id": 3,
+      "id": 2,
       "name": "Mega Potion",
       "icon": "./img/potions/mega.png",
       "itemCount": 0
     },
     {
-      "id": 4,
+      "id": 3,
       "name": "Luck Potion",
       "icon": "./img/potions/green.png",
-      "itemCount": 0
+      "itemCount": 3
     },
     {
       "id": 4,
       "name": "Golden Dog",
       "icon": "./img/Pets/golden-dog.png",
-      "itemCount": 0
+      "itemCount": 1
     },
     {
       "id": 5,
       "name": "XP Potion",
-      "icon": "./img/potions/yellow.png",
-      "itemCount": 0
+      "icon": "./img/potions/yellow (1).png",
+      "itemCount": 1
     }
   ]
   
@@ -197,8 +197,31 @@ function spinWheel() {
         state = 1;
         phi += Math.ceil(Math.random() * 8000) + 3000;
         document.getElementById('wheel').style.transform = `rotate(${phi}deg)`
+        phi = phi % 360
+        if(phi >=  0 && phi < 60){
+            items[1].itemCount++
+        }
+        if(phi >=  60 && phi < 120){
+            items[5].itemCount++
+        }
+        if(phi >=  120 && phi < 180){
+            items[3].itemCount++
+        }
+        if(phi >=  180 && phi < 240){
+            items[2].itemCount++
+        }
+        if(phi >=  240 && phi < 300){
+            items[0].itemCount++
+        }
+        if(phi >=  300 && phi < 360){
+
+            items[4].itemCount++
+        }
+
+        updateInventorySlots()
     }
     
+
 }
 
 function updateState() {
@@ -230,6 +253,14 @@ setInterval(updateState, 1)
  let claimed = false;
  let claimstate =  0;
  function claimDaily() {
+     if(dailyCounter / 3 == 1){
+        items[2].itemCount++
+     }else if(dailyCounter / 2 == 1){
+        items[5].itemCount++
+     }else if(dailyCounter / 1 == 1){
+        items[3].itemCount++
+        console.log("test")
+     }
      if(claimstate == 0){
      const currentDayElement = document.querySelector(`#daily-reward-grid div:nth-child(${dailyCounter})`);
      if (currentDayElement) {
@@ -238,6 +269,8 @@ setInterval(updateState, 1)
      claimstate = 1;
      dailyCounter++
      claimed = true
+
+
      if (dailyCounter > 9) {
         for (let i = 1; i <= 9; i++) {
         document.querySelector(`#daily-reward-grid div:nth-child(${i})`).style.backgroundColor = 'white';
@@ -248,6 +281,9 @@ setInterval(updateState, 1)
     }
  }
  
+//BUG BEI RESET BEI MITTERNACHT
+//MAN KANN KEIN ZWEITES MAL CLAIMEN
+
  function updateDailyState() {
     const date = new Date();
     let hoursLeft = 23 - date.getHours();
@@ -258,7 +294,7 @@ setInterval(updateState, 1)
 
      if (claimed) {
  
-         if(hoursLeft >= 0 && minutesLeft >= 0 && secondsLeft >= 0){
+         if(hoursLeft > 0 && minutesLeft > 0 && secondsLeft > 0){
             document.getElementById('dailyrewards-cd').innerHTML = (hoursLeft <= 9 ? "0" : "") + hoursLeft + ":" + (minutesLeft <= 9 ? "0" : "") + minutesLeft + ":" + (secondsLeft <= 9 ? "0" : "") + secondsLeft;
             document.getElementById('dailyrewards-cd').style.color = "lightgrey";
      }else if(hoursLeft <= 0 && minutesLeft <= 0 && secondsLeft <= 0){
@@ -270,13 +306,34 @@ setInterval(updateState, 1)
     }
 }
  setInterval(updateDailyState, 50)
+ setInterval(updateInventorySlots, 2000)
 
 
  function generateInventory() {
     let grid = document.getElementById('inv-grid');
+    grid.innerHTML = ""
 
-    for (let index = 0; index < 15; index++) {
-        grid.innerHTML += `<div class="inv-bg"></div>`;
+    for (let index = 0; index < 30; index++) {
+        grid.innerHTML += `<div id="${index}_inv" class="inv-bg"></div>`;
     }
 }
-generateInventory()
+function updateInventorySlots() {
+    for (let i = 0; i < 30; i++) {
+        const slot = document.getElementById(`${i}_inv`);
+        if (slot) slot.innerHTML = "";
+    }
+    let slotIndex = 0;
+    for (let i = 0; i < items.length; i++) {
+        if (items[i].itemCount >= 1 && slotIndex < 30) {
+            let slot = document.getElementById(`${slotIndex}_inv`);
+            if (slot) {
+                slot.innerHTML = `
+                    <img src="${items[i].icon}" class="item-icon" />
+                    <span class="item-count">${items[i].itemCount}</span>
+                `;
+                slotIndex++;
+            }
+        }
+    }
+}
+
