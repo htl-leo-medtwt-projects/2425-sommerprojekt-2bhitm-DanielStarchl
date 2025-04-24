@@ -273,6 +273,9 @@ body {
 
 }
 
+.egg-buy h3{
+    transition: 0.5s ease-in-out;
+}
 
 
 .pop-up h2{

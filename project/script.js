@@ -41,6 +41,48 @@ let items = [
       "icon": "./img/potions/yellow (1).png",
       "itemCount": 1
     }
+    ,
+    {
+      "id": 6,
+      "name": "egg",
+      "icon": "./img/eggs/egg1.png",
+      "itemCount": 0
+    }
+    ,
+    {
+      "id": 7,
+      "name": "egg",
+      "icon": "./img/eggs/egg2.png",
+      "itemCount": 0
+    }
+    ,
+    {
+      "id": 8,
+      "name": "egg",
+      "icon": "./img/eggs/egg3.png",
+      "itemCount": 1
+    }
+    ,
+    {
+      "id": 9,
+      "name": "egg",
+      "icon": "./img/eggs/egg4.png",
+      "itemCount": 1
+    }
+    ,
+    {
+      "id": 10,
+      "name": "egg",
+      "icon": "./img/eggs/egg5.png",
+      "itemCount": 1
+    }
+    ,
+    {
+      "id": 11,
+      "name": "egg",
+      "icon": "./img/eggs/egg6.png",
+      "itemCount": 1
+    }
   ]
   
 
@@ -337,3 +379,23 @@ function updateInventorySlots() {
     }
 }
 
+function buyEggs(idBuy , price , color){
+    money += 200
+    if(money >= price){
+        money -= price
+        document.getElementById('money').innerHTML = money
+        items[idBuy].itemCount++
+        updateInventorySlots()
+        color.style.filter = "drop-shadow(0 0 7px green)";
+        setTimeout(() => {
+           color.style.filter = "none"
+        }, 1000);
+    }else{
+       color.style.filter = "drop-shadow(0 0 7px red)";
+        setTimeout(() => {
+            color.style.filter = "none"
+        }, 1000);  
+    }
+    
+    }
+   
