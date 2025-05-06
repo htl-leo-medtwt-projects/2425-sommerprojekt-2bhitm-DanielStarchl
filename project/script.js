@@ -27,19 +27,19 @@ let items = [
       "id": 3,
       "name": "Luck Potion",
       "icon": "./img/potions/green.png",
-      "itemCount": 3
+      "itemCount": 1
     },
     {
       "id": 4,
       "name": "Golden Dog",
       "icon": "./img/Pets/golden-dog.png",
-      "itemCount": 1
+      "itemCount": 0
     },
     {
       "id": 5,
       "name": "XP Potion",
       "icon": "./img/potions/yellow (1).png",
-      "itemCount": 1
+      "itemCount": 0
     }
     ,
     {
@@ -60,28 +60,28 @@ let items = [
       "id": 8,
       "name": "egg",
       "icon": "./img/eggs/egg3.png",
-      "itemCount": 1
+      "itemCount": 0
     }
     ,
     {
       "id": 9,
       "name": "egg",
       "icon": "./img/eggs/egg4.png",
-      "itemCount": 1
+      "itemCount": 0
     }
     ,
     {
       "id": 10,
       "name": "egg",
       "icon": "./img/eggs/egg5.png",
-      "itemCount": 1
+      "itemCount": 0
     }
     ,
     {
       "id": 11,
       "name": "egg",
       "icon": "./img/eggs/egg6.png",
-      "itemCount": 1
+      "itemCount": 0
     }
   ]
   
@@ -398,4 +398,22 @@ function buyEggs(idBuy , price , color){
     }
     
     }
-   
+
+
+    let counterSlider = 0;
+    function sliderNext(){
+        counterSlider++
+        if(counterSlider > 2){
+            counterSlider = 0
+        }
+        if(counterSlider == 0){
+        document.getElementById('planet1').src = `/img/planets/normal.png`
+    }
+        if(counterSlider == 1){
+        document.getElementById('slider-planet1').src = `/img/planets/normal.png` 
+    }
+        if(counterSlider == 2){
+        document.getElementById('slider-planet1').src = `/img/planets/normal.png`
+        return
+    }
+}
