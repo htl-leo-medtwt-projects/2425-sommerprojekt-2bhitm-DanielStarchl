@@ -9,25 +9,29 @@ let items = [
       "id": 0,
       "name": "Health Potion",
       "icon": "./img/potions/red.png",
-      "itemCount": 0
+      "itemCount": 2,
+      "function": "useHealth()"
     },
     {
       "id": 1,
       "name": "Mana Potion",
       "icon": "./img/potions/blue.png",
-      "itemCount": 0
+      "itemCount": 3,
+      "function": "useMana()"
     },
     {
       "id": 2,
       "name": "Mega Potion",
       "icon": "./img/potions/mega.png",
-      "itemCount": 0
+      "itemCount": 4,
+      "function": "useMega()"
     },
     {
       "id": 3,
       "name": "Luck Potion",
       "icon": "./img/potions/green.png",
-      "itemCount": 1
+      "itemCount": 2,
+      "function": "useLuck()"
     },
     {
       "id": 4,
@@ -39,50 +43,79 @@ let items = [
       "id": 5,
       "name": "XP Potion",
       "icon": "./img/potions/yellow (1).png",
-      "itemCount": 0
+      "itemCount": 5,
+      "function": "useXP()"
     }
     ,
     {
       "id": 6,
       "name": "egg",
       "icon": "./img/eggs/egg1.png",
-      "itemCount": 0
+      "itemCount": 1,
+      "function": "rollEgg(6)"
     }
     ,
     {
       "id": 7,
       "name": "egg",
       "icon": "./img/eggs/egg2.png",
-      "itemCount": 0
+      "itemCount": 1,
+      "function": "rollEgg(7)"
     }
     ,
     {
       "id": 8,
       "name": "egg",
       "icon": "./img/eggs/egg3.png",
-      "itemCount": 0
+      "itemCount": 1,
+      "function": "rollEgg(8)"
     }
     ,
     {
       "id": 9,
       "name": "egg",
       "icon": "./img/eggs/egg4.png",
-      "itemCount": 0
+      "itemCount": 1,
+      "function": "rollEgg(9)"
     }
     ,
     {
       "id": 10,
       "name": "egg",
       "icon": "./img/eggs/egg5.png",
-      "itemCount": 0
+      "itemCount": 1,
+      "function": "rollEgg(10)"
     }
     ,
     {
       "id": 11,
       "name": "egg",
       "icon": "./img/eggs/egg6.png",
-      "itemCount": 0
+      "itemCount": 1,
+      "function": "rollEgg(11)"
     }
+    ,
+    {
+      "id": 12,
+      "name": "key",
+      "icon": "./img/key/keyBlue.png",
+      "itemCount": 1
+    }
+    ,
+    {
+      "id": 13,
+      "name": "key",
+      "icon": "./img/key/keyGold.png",
+      "itemCount": 4
+    }
+    ,
+    {
+      "id": 14,
+      "name": "key",
+      "icon": "./img/key/keyBlack.png",
+      "itemCount": 1
+    }
+
   ]
   
 
@@ -126,6 +159,7 @@ function rollStart() {
     for (let index = 0; index < 20; index++) {
         setTimeout(() => {
             rng = Math.ceil(Math.random() * 1000)
+            rng+= luck + 4 * megaluck 
             if (rng >= 0 && rng <= 400) {
                 value = 1
                 rarity = "common"
@@ -162,6 +196,12 @@ function rollStart() {
                 color = "yellow"
                 document.getElementById('image-block').src = "./img/lucky-blocks/legendary.png"
             }
+            if (rng > 1000) {
+                value = 6
+                rarity = "SECRET"
+                color = "white"
+                document.getElementById('image-block').src = "./img/lucky-blocks/legendary.png"
+            }
 
         }, (index * delay));
         delay += 10
@@ -191,10 +231,10 @@ function rollStart() {
         console.log(money)
         xp += value * 60
         lvl = xp / 1000
-        money += Math.ceil(parseInt(money) + value + Math.pow(value, lvl))
+        money += Math.ceil(parseInt(money) + value + Math.pow(lvl, value))
         moneyElem.innerHTML = money
         rolls++
-
+        
         document.getElementById('luck').innerHTML = luck + "x"
         document.getElementById('xp-count').innerHTML = xp + "/1000 XP"
         document.getElementById('bar-empty').style.width = (xp/5) + "px"
@@ -202,13 +242,109 @@ function rollStart() {
         document.getElementById('rolls').innerHTML = rolls
         document.getElementById('luckyrolls').innerHTML = luckyrolls
     }, 5000);
-
+    
 }
 
+function useHealth() {
+    if (items[0].itemCount >= 1) {
+        items[0].itemCount--
+        money +=  Math.ceil(parseInt(money) + 3 + Math.pow(lvl, 3)) * 10
+        moneyElem.innerHTML = money
+        console.log(money)
+        updateInventorySlots()
+    }
+}
+function useMana() {
+    if (items[1].itemCount >= 1) {
+        items[1].itemCount--
+        xp += Math.ceil((lvl * 120) + 100)
+        lvl = xp / 1000
+       document.getElementById('xp-count').innerHTML = xp + "/1000 XP"
+        document.getElementById('bar-empty').style.width = (xp/5) + "px"
+        updateInventorySlots()
+    }
+}
+function useMega() {
+    if (items[2].itemCount >= 1) {
+        items[2].itemCount--
+        document.getElementById('luck').innerHTML = luck + "x"
+        luck += 3
+        megaluck += 1
+        document.getElementById('megaluck').innerHTML = megaluck + "x"
+        document.getElementById('rolls').innerHTML = rolls
+        console.log(money)
+        updateInventorySlots()
+    }
+}
+function useLuck() {
+    if (items[3].itemCount >= 1) {
+        items[3].itemCount--
+        document.getElementById('luck').innerHTML = luck + "x"
+        luck += 2
+        document.getElementById('megaluck').innerHTML = megaluck + "x"
+        document.getElementById('rolls').innerHTML = rolls
+        console.log(money)
+        updateInventorySlots()
+    }
+}
+function useXP() {
+    if (items[5].itemCount >= 1) {
+        items[5].itemCount--
+        xp += Math.ceil((lvl * 220) + 500)
+        lvl = xp / 1000
+       document.getElementById('xp-count').innerHTML = xp + "/1000 XP"
+        document.getElementById('bar-empty').style.width = (xp/5) + "px"
+        updateInventorySlots()
+    }
+}
+function rollEgg(idEgg) {
+    if (items[idEgg].itemCount >= 1) {
+        items[idEgg].itemCount--
+        let rng = Math.ceil(Math.random() * 3)
+        if (rng == 1 || rng == 2) {
+            items[4].itemCount++
+        }
+        updateInventorySlots()
+    }
+}
+
+function exploreStart(){
+    console.log(planet)
+    document.getElementById('messageEx').style.display = "block"
+    setTimeout(() => {
+        document.getElementById('messageEx').style.display = "none"     
+    }, 200);
+    if(planet == "normal"){
+        if(items[12].itemCount >= 1){
+             console.log("normal")
+        items[12].itemCount--
+        document.getElementById('messageEx').innerHTML = `<h2>You Lost a</h2> <img class="imgExplore" src="${items[12].icon}"> <h2>and got ${lvl}</h2> <img class="imgExplore" src="${items[4].icon}">  `
+        items[4] += lvl
+        }
+       
+    }
+    if(planet == "vip"){
+        if(items[13].itemCount >= 1){
+            console.log("normal")
+       items[13].itemCount--
+       document.getElementById('messageEx').innerHTML = `<h2>You Lost a</h2> <img class="imgExplore" src="${items[13].icon}"> <h2>and got ${lvl}</h2> <img class="imgExplore" src="${items[4].icon}">  `
+       items[4] += lvl
+       }
+    }
+    if(planet == "hell"){
+        if(items[13].itemCount >= 1){
+            console.log("normal")
+       items[13].itemCount--
+       document.getElementById('messageEx').innerHTML = `<h2>You Lost a</h2> <img class="imgExplore" src="${items[13].icon}"> <h2>and got ${lvl}</h2> <img class="imgExplore" src="${items[4].icon}">  `
+       items[4] += lvl
+       }
+    }
+}
 
 function openStats() {
     document.getElementById('stats-pop').style.display = "block"
 }
+
 
 
 function closeStats() {
@@ -267,6 +403,10 @@ function spinWheel() {
 }
 
 function updateState() {
+    if(xp >= 1000){
+        xp = 0;
+        lvl++
+    }
     const date = new Date();
     let hoursLeft = 23 - date.getHours();
     let minutesLeft = 59 - date.getMinutes();
@@ -370,7 +510,7 @@ function updateInventorySlots() {
             let slot = document.getElementById(`${slotIndex}_inv`);
             if (slot) {
                 slot.innerHTML = `
-                    <img src="${items[i].icon}" class="item-icon" />
+                    <img onclick="${items[i].function}" src="${items[i].icon}" class="item-icon" />
                     <span class="item-count">${items[i].itemCount}</span>
                 `;
                 slotIndex++;
@@ -380,7 +520,6 @@ function updateInventorySlots() {
 }
 
 function buyEggs(idBuy , price , color){
-    money += 200
     if(money >= price){
         money -= price
         document.getElementById('money').innerHTML = money
@@ -400,20 +539,51 @@ function buyEggs(idBuy , price , color){
     }
 
 
-    let counterSlider = 0;
+    let counterSlider = -1;
+    let SliderLock = true;
+    let planet = "normal"
     function sliderNext(){
+        if(SliderLock == true && counterSlider == -1){
+            counterSlider = 2
+            SliderLock = false
+        }
+
+        counterSlider--
+        if(counterSlider < 0){
+            counterSlider = 2
+        }
+        updateSlider()
+}
+    function sliderBack(){
         counterSlider++
         if(counterSlider > 2){
             counterSlider = 0
         }
-        if(counterSlider == 0){
-        document.getElementById('planet1').src = `/img/planets/normal.png`
+        updateSlider()
+}
+
+function updateSlider(){
+    if(counterSlider == 0){
+        document.getElementById('planet1').src = `./img/planets/hell.png`
+        document.getElementById('planet2').src = `./img/planets/vip.png`
+        document.getElementById('planet3').src = `./img/planets/normal.png`
+        document.getElementById('skybox').style.background = `linear-gradient(180deg,rgb(246, 255, 0) 0%,rgb(196, 201, 168) 77%,rgb(235, 237, 127) 92%,rgb(220, 220, 220) 100%)`
+        planet = "vip"
     }
-        if(counterSlider == 1){
-        document.getElementById('slider-planet1').src = `/img/planets/normal.png` 
+    if(counterSlider == 1){
+        document.getElementById('planet1').src = `./img/planets/normal.png`
+        document.getElementById('planet2').src = `./img/planets/hell.png`
+        document.getElementById('planet3').src = `./img/planets/vip.png`
+        document.getElementById('skybox').style.background = `linear-gradient(180deg,rgb(180, 68, 16) 0%,rgb(206, 163, 5) 77%,rgb(202, 237, 127) 92%,rgb(167, 84, 81) 100%)`
+        planet = "hell"
+        
     }
-        if(counterSlider == 2){
-        document.getElementById('slider-planet1').src = `/img/planets/normal.png`
+    if(counterSlider == 2){
+        document.getElementById('planet1').src = `./img/planets/vip.png`
+        document.getElementById('planet2').src = `./img/planets/normal.png`
+        document.getElementById('planet3').src = `./img/planets/hell.png`
+        document.getElementById('skybox').style.background = `linear-gradient(180deg, #08205B 0%, #385191 77%, #3F5794 92%, #5169A7 100%)`
+        planet = "normal"
         return
     }
 }

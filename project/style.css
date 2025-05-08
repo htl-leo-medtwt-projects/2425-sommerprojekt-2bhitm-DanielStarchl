@@ -129,7 +129,21 @@ body {
     display: flex;
 }
 
+.imgExplore{
+    width: 20px;
+}
+
+#messageEx{
+    position: absolute;
+    bottom: 100px;
+}
+
+#messageEx h2{
+    color: rgb(255, 255, 255);
+}
+
 #main-planet{
+    pointer-events: none;
     z-index: 1000;
     width: 100vw;
     height: 100vh;
@@ -143,6 +157,7 @@ body {
     height: 170px;
 }
 #slider-planet{
+    pointer-events: none;
     position: relative;
     bottom: 20px;
     z-index: 1000;
@@ -455,7 +470,42 @@ body {
     z-index: 0;
     width: 100vw;
     height: 100vh;
+    transition: 1s ease-in-out;
 }
+
+#cloud1{
+    position: absolute;
+    z-index: 0;
+    width: 80px;
+    top: 500px;
+    left: 10px;
+    background-image: url('./img/clouds.png');
+}
+#cloud2{
+    position: absolute;
+    z-index: 0;
+    width: 40px;
+    top: 200px;
+    left: 80px;
+    background-image: url('./img/clouds.png');
+}
+#cloud3{
+    position: absolute;
+    z-index: 0;
+    width: 60px;
+    top: 130px;
+    right: 30px;
+    background-image: url('./img/clouds.png');
+}
+#cloud4{
+    position: absolute;
+    z-index: 0;
+    width: 60px;
+    top: 500px;
+    right: 20px;
+    background-image: url('./img/clouds.png');
+}
+
 
 #shop-sign{
     display: flex;
