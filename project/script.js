@@ -159,7 +159,9 @@ function rollStart() {
     for (let index = 0; index < 20; index++) {
         setTimeout(() => {
             rng = Math.ceil(Math.random() * 1000)
+            console.log("rng:" + rng)
             rng+= luck + 4 * megaluck 
+            console.log("rng:" + rng)
             if (rng >= 0 && rng <= 400) {
                 value = 1
                 rarity = "common"
@@ -310,18 +312,24 @@ function rollEgg(idEgg) {
 
 function exploreStart(){
     console.log(planet)
+    document.getElementById('messageEx').innerHTML = `<div><h2>No keys available</h2></div>  `
+    
     document.getElementById('messageEx').style.display = "block"
+    document.getElementById('messageEx').style.opacity = 1
+    setTimeout(() => {
+        document.getElementById('messageEx').style.opacity = 0
+    }, 1000);
     setTimeout(() => {
         document.getElementById('messageEx').style.display = "none"     
-    }, 200);
+    }, 2000);
     if(planet == "normal"){
         if(items[12].itemCount >= 1){
-             console.log("normal")
-        items[12].itemCount--
-        document.getElementById('messageEx').innerHTML = `<h2>You Lost a</h2> <img class="imgExplore" src="${items[12].icon}"> <h2>and got ${lvl}</h2> <img class="imgExplore" src="${items[4].icon}">  `
-        items[4] += lvl
+            console.log("normal")
+            items[12].itemCount--
+            document.getElementById('messageEx').innerHTML = `<h2>You Lost a</h2> <img class="imgExplore" src="${items[12].icon}"> <h2>and got ${lvl}</h2> <img class="imgExplore" src="${items[4].icon}">  `
+            items[4] += lvl
         }
-       
+        
     }
     if(planet == "vip"){
         if(items[13].itemCount >= 1){
