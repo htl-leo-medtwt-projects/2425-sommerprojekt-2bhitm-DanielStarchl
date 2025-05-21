@@ -147,6 +147,7 @@
         </div>
         <div>
             <h2 id="xp-count">0/1000 XP</h2>
+            <h2 id="xp-level">LVL: 0</h2>
         </div>
         </div>
     </div>
@@ -171,10 +172,10 @@
     </div>
     <div class="align">
         <div id="navigation">
-            <img onclick="location.hash='window1'" src="./img/nav/lucky.png" alt="lucky-block">
-            <img onclick="location.hash='window2'" src="./img/nav/egg.png" alt="lucky-block">
-            <img onclick="location.hash='window3'" src="./img/nav/backpack.png" alt="lucky-block">
-            <img onclick="location.hash='window4'" src="./img/nav/sword.png" alt="lucky-block">
+            <img onclick="playNavSound(); location.hash='window1'" src="./img/nav/lucky.png" alt="lucky-block">
+            <img onclick="playNavSound(); location.hash='window2'" src="./img/nav/egg.png" alt="lucky-block">
+            <img onclick="playNavSound(); location.hash='window3'" src="./img/nav/backpack.png" alt="lucky-block">
+            <img onclick="playNavSound(); location.hash='window4'" src="./img/nav/sword.png" alt="lucky-block">
     </div>
 </div>
 </div>
@@ -260,6 +261,9 @@
 
  <!--Window 4-->
  <div id="window4">
+     <div style="display: none;" id="messageEx"><h2></h2></div>
+     <div style="display: none;" id="chestOpen"><img id="chestPNG" src="./img/key/d35139182835971.653514651fe67.png" alt=""></div>
+    <div id="overlay2"></div>
     <div id="skybox">
         <div class="align">
             <div id="slider-planet">
@@ -274,8 +278,6 @@
                 </div>
             </div>
         <div onclick="exploreStart()" id="explore-btn">EXPLORE !</div>
-        <div style="display: none;" id="messageEx"><h2></h2></div>
-        
         </div>
         <img id="cloud1" src="./img/planets/cloud.png" alt="cloud">
         <img id="cloud2" src="./img/planets/cloud.png" alt="cloud">

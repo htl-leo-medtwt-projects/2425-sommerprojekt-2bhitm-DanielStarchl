@@ -3,6 +3,16 @@ new Sortable(document.getElementById('inv-grid'),{
     swap: true
 })
 
+let click = new Audio("./audio/click.mp3")
+let spin = new Audio("./audio/spin.mp3")
+let wow = new Audio("./audio/wow.mp3")
+let swipe = new Audio("./audio/swipe.mp3")
+
+function playNavSound() {
+    let swipe = new Audio('./audio/swipe.mp3');
+    swipe.play();
+}
+
 // Items
 let items = [
     {
@@ -157,7 +167,9 @@ function rollStart() {
     document.getElementById('overlay').style.opacity = "0.8"
     document.getElementById('roll-btn').disabled = true
     for (let index = 0; index < 20; index++) {
+        let spin = new Audio("./audio/spin.mp3")
         setTimeout(() => {
+            spin.play()
             rng = Math.ceil(Math.random() * 1000)
             console.log("rng:" + rng)
             rng+= luck + 4 * megaluck 
@@ -215,6 +227,7 @@ function rollStart() {
         }
         for (let index = 0; index <= 6; index++) {
             if (index == value) {
+                wow.play()
                 document.getElementById('rarity').innerHTML = rarity
                 document.getElementById('rarity').style.opacity = 1
                 document.getElementById('image-block').style.filter = `drop-shadow(10px 10px 35px ${color}) drop-shadow(-5px -5px 35px ${color})`
@@ -232,13 +245,13 @@ function rollStart() {
         }
         console.log(money)
         xp += value * 60
-        lvl = xp / 1000
         money += Math.ceil(parseInt(money) + value + Math.pow(lvl, value))
         moneyElem.innerHTML = money
         rolls++
         
         document.getElementById('luck').innerHTML = luck + "x"
         document.getElementById('xp-count').innerHTML = xp + "/1000 XP"
+        document.getElementById('xp-level').innerHTML = "LVL: " + Math.ceil(lvl)
         document.getElementById('bar-empty').style.width = (xp/5) + "px"
         document.getElementById('megaluck').innerHTML = megaluck + "x"
         document.getElementById('rolls').innerHTML = rolls
@@ -248,6 +261,8 @@ function rollStart() {
 }
 
 function useHealth() {
+    let use = new Audio("./audio/use.mp3")
+    use.play()
     if (items[0].itemCount >= 1) {
         items[0].itemCount--
         money +=  Math.ceil(parseInt(money) + 3 + Math.pow(lvl, 3)) * 10
@@ -257,16 +272,19 @@ function useHealth() {
     }
 }
 function useMana() {
+     let use = new Audio("./audio/use.mp3")
+    use.play()
     if (items[1].itemCount >= 1) {
         items[1].itemCount--
         xp += Math.ceil((lvl * 120) + 100)
-        lvl = xp / 1000
-       document.getElementById('xp-count').innerHTML = xp + "/1000 XP"
+        document.getElementById('xp-count').innerHTML = xp + "/1000 XP"
         document.getElementById('bar-empty').style.width = (xp/5) + "px"
         updateInventorySlots()
     }
 }
 function useMega() {
+     let use = new Audio("./audio/use.mp3")
+    use.play()
     if (items[2].itemCount >= 1) {
         items[2].itemCount--
         document.getElementById('luck').innerHTML = luck + "x"
@@ -279,6 +297,8 @@ function useMega() {
     }
 }
 function useLuck() {
+     let use = new Audio("./audio/use.mp3")
+    use.play()
     if (items[3].itemCount >= 1) {
         items[3].itemCount--
         document.getElementById('luck').innerHTML = luck + "x"
@@ -290,16 +310,19 @@ function useLuck() {
     }
 }
 function useXP() {
+     let use = new Audio("./audio/use.mp3")
+    use.play()
     if (items[5].itemCount >= 1) {
         items[5].itemCount--
         xp += Math.ceil((lvl * 220) + 500)
-        lvl = xp / 1000
        document.getElementById('xp-count').innerHTML = xp + "/1000 XP"
-        document.getElementById('bar-empty').style.width = (xp/5) + "px"
+       document.getElementById('bar-empty').style.width = (xp/5) + "px"
         updateInventorySlots()
     }
 }
 function rollEgg(idEgg) {
+     let use = new Audio("./audio/use.mp3")
+    use.play()
     if (items[idEgg].itemCount >= 1) {
         items[idEgg].itemCount--
         let rng = Math.ceil(Math.random() * 3)
@@ -310,75 +333,111 @@ function rollEgg(idEgg) {
     }
 }
 
-function exploreStart(){
-    console.log(planet)
-    document.getElementById('messageEx').innerHTML = `<div><h2>No keys available</h2></div>  `
-    
-    document.getElementById('messageEx').style.display = "block"
-    document.getElementById('messageEx').style.opacity = 1
+function exploreStart() {
+    let msg = `<div><h2>No keys available</h2></div>`;
+    let foundKey = false;
+
+    if (planet == "normal" && items[12].itemCount >= 1) {
+         document.getElementById('overlay2').style.visibility = "visible"
+        document.getElementById('overlay2').style.opacity = "0.8"
+        items[12].itemCount--;
+        msg = `<h2>You Lost a</h2> <img class="imgExplore" src="${items[12].icon}"> <h2>and got ${lvl}</h2> <img class="imgExplore" src="${items[4].icon}">`;
+        
+        items[4].itemCount += lvl;
+        foundKey = true;
+        setTimeout(() => {
+            let chest = new Audio("./audio/chest.mp3")
+        chest.play()
+        }, 2000);
+    }
+    if (planet == "vip" && items[13].itemCount >= 1) {
+        document.getElementById('overlay2').style.visibility = "visible"
+        document.getElementById('overlay2').style.opacity = "0.8"
+        items[13].itemCount--;
+        setTimeout(() => {
+            let chest = new Audio("./audio/chest.mp3")
+        chest.play()
+        }, 2000);
+        msg = `<h2>You Lost a</h2> <img class="imgExplore" src="${items[13].icon}"> <h2>and got ${lvl}</h2> <img class="imgExplore" src="${items[4].icon}">`;
+        items[4].itemCount += lvl;
+        foundKey = true;
+    }
+    if (planet == "hell" && items[14].itemCount >= 1) {
+        document.getElementById('overlay2').style.visibility = "visible"
+        document.getElementById('overlay2').style.opacity = "0.8"
+        items[14].itemCount--;
+       setTimeout(() => {
+            let chest = new Audio("./audio/chest.mp3")
+        chest.play()
+        }, 2000);
+        msg = `<h2>You Lost a</h2> <img class="imgExplore" src="${items[14].icon}"> <h2>and got ${lvl}</h2> <img class="imgExplore" src="${items[4].icon}">`;
+        items[4].itemCount += lvl;
+        foundKey = true;
+    }
+
+    document.getElementById('messageEx').innerHTML = msg;
+    document.getElementById('messageEx').style.display = "block";
+    document.getElementById('chestOpen').style.display = "block";
+    document.getElementById('messageEx').style.opacity = 1;
     setTimeout(() => {
-        document.getElementById('messageEx').style.opacity = 0
+        document.getElementById('overlay2').style.visibility = "hidden"
+                document.getElementById('overlay2').style.opacity = "0"
+        document.getElementById('messageEx').style.opacity = 0;
+        document.getElementById('chestOpen').style.display = "none";
+    }, 4000);
+    setTimeout(() => {
+        document.getElementById('chestPNG').src="./img/key/494ddb182835971.65350ee2037a9.gif";
     }, 1000);
     setTimeout(() => {
-        document.getElementById('messageEx').style.display = "none"     
-    }, 2000);
-    if(planet == "normal"){
-        if(items[12].itemCount >= 1){
-            console.log("normal")
-            items[12].itemCount--
-            document.getElementById('messageEx').innerHTML = `<h2>You Lost a</h2> <img class="imgExplore" src="${items[12].icon}"> <h2>and got ${lvl}</h2> <img class="imgExplore" src="${items[4].icon}">  `
-            items[4] += lvl
-        }
-        
-    }
-    if(planet == "vip"){
-        if(items[13].itemCount >= 1){
-            console.log("normal")
-       items[13].itemCount--
-       document.getElementById('messageEx').innerHTML = `<h2>You Lost a</h2> <img class="imgExplore" src="${items[13].icon}"> <h2>and got ${lvl}</h2> <img class="imgExplore" src="${items[4].icon}">  `
-       items[4] += lvl
-       }
-    }
-    if(planet == "hell"){
-        if(items[13].itemCount >= 1){
-            console.log("normal")
-       items[13].itemCount--
-       document.getElementById('messageEx').innerHTML = `<h2>You Lost a</h2> <img class="imgExplore" src="${items[13].icon}"> <h2>and got ${lvl}</h2> <img class="imgExplore" src="${items[4].icon}">  `
-       items[4] += lvl
-       }
-    }
+        document.getElementById('messageEx').style.display = "none";
+    }, 5000);
+
+    if (foundKey) updateInventorySlots();
 }
 
 function openStats() {
     document.getElementById('stats-pop').style.display = "block"
+    let click = new Audio("./audio/click.mp3")
+    click.play()
 }
 
 
 
 function closeStats() {
+    let click = new Audio("./audio/click.mp3")
+    click.play()
     document.getElementById('stats-pop').style.display = "none"
 }
 function openCalendar() {
+    let click = new Audio("./audio/click.mp3")
+    click.play()
     document.getElementById('daily-pop').style.display = "block"
 }
 
 
 function closeCalendar() {
+    let click = new Audio("./audio/click.mp3")
+    click.play()
     document.getElementById('daily-pop').style.display = "none"
 }
 function openWheel() {
+    let click = new Audio("./audio/click.mp3")
+    click.play()
     document.getElementById('spinning-pop').style.display = "block"
 }
 
 
 function closeWheel() {
+    let click = new Audio("./audio/click.mp3")
+    click.play()
     document.getElementById('spinning-pop').style.display = "none"
 }
 
 let phi = 0;
 let state = 0;
 function spinWheel() {
-
+    let roll = new Audio("./audio/roll.mp3")
+    roll.play()
     if (state === 0) {
         state = 1;
         phi += Math.ceil(Math.random() * 8000) + 3000;
@@ -403,7 +462,10 @@ function spinWheel() {
 
             items[4].itemCount++
         }
-
+        
+        setTimeout(() => {
+        wow.play() 
+        }, 6000);
         updateInventorySlots()
     }
     
@@ -414,6 +476,7 @@ function updateState() {
     if(xp >= 1000){
         xp = 0;
         lvl++
+        document.getElementById('xp-level').innerHTML = "LVL: " + Math.ceil(lvl)
     }
     const date = new Date();
     let hoursLeft = 23 - date.getHours();
@@ -443,6 +506,7 @@ setInterval(updateState, 1)
  let claimed = false;
  let claimstate =  0;
  function claimDaily() {
+    wow.play()
      if(dailyCounter / 3 == 1){
         items[2].itemCount++
      }else if(dailyCounter / 2 == 1){
@@ -529,6 +593,8 @@ function updateInventorySlots() {
 
 function buyEggs(idBuy , price , color){
     if(money >= price){
+        let click = new Audio("./audio/click.mp3")
+        click.play()
         money -= price
         document.getElementById('money').innerHTML = money
         items[idBuy].itemCount++
@@ -538,6 +604,8 @@ function buyEggs(idBuy , price , color){
            color.style.filter = "none"
         }, 1000);
     }else{
+        let wrong = new Audio("./audio/wrong.mp3")
+        wrong.play()
        color.style.filter = "drop-shadow(0 0 7px red)";
         setTimeout(() => {
             color.style.filter = "none"
@@ -572,6 +640,8 @@ function buyEggs(idBuy , price , color){
 
 function updateSlider(){
     if(counterSlider == 0){
+        let click = new Audio("./audio/click.mp3")
+    click.play()
         document.getElementById('planet1').src = `./img/planets/hell.png`
         document.getElementById('planet2').src = `./img/planets/vip.png`
         document.getElementById('planet3').src = `./img/planets/normal.png`
@@ -579,6 +649,8 @@ function updateSlider(){
         planet = "vip"
     }
     if(counterSlider == 1){
+        let click = new Audio("./audio/click.mp3")
+    click.play()
         document.getElementById('planet1').src = `./img/planets/normal.png`
         document.getElementById('planet2').src = `./img/planets/hell.png`
         document.getElementById('planet3').src = `./img/planets/vip.png`
@@ -587,6 +659,8 @@ function updateSlider(){
         
     }
     if(counterSlider == 2){
+        let click = new Audio("./audio/click.mp3")
+    click.play()
         document.getElementById('planet1').src = `./img/planets/vip.png`
         document.getElementById('planet2').src = `./img/planets/normal.png`
         document.getElementById('planet3').src = `./img/planets/hell.png`
