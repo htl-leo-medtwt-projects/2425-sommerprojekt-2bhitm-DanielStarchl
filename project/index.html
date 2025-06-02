@@ -133,6 +133,31 @@
                         </div>
                     </div>
                 </div>
+                <!--TEMPLATE FÜR POPUP-->
+                <div style="display: none;" id="settings-pop">
+                    <div onclick="closeSettings()" class="bg-filter"></div>
+                    <div class="align-pop">
+                        <div class="pop-up">
+                            <img onclick="closeSettings()" class="xcancel" src="./img/gui/X 2nd Outline 256px.png" alt="">
+                            <h2>Settings</h2>
+                            <br>
+                            <hr>
+                            <h3 style="text-align: center;; margin-top: -25px; margin-bottom: 40px; color: rgba(156, 154, 154, 0.748);" id="timer-wheel"></h3>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: none;" id="shop-pop">
+                    <div onclick="closeShop()" class="bg-filter"></div>
+                    <div class="align-pop">
+                        <div class="pop-up">
+                            <img onclick="closeShop()" class="xcancel" src="./img/gui/X 2nd Outline 256px.png" alt="">
+                            <h2>Shop</h2>
+                            <br>
+                            <hr>
+                            <h3 style="text-align: center;; margin-top: -25px; margin-bottom: 40px; color: rgba(156, 154, 154, 0.748);" id="timer-wheel"></h3>
+                        </div>
+                    </div>
+                </div>
 
     <div id="navigation-top">
         <div id="money-box">
@@ -152,8 +177,8 @@
         </div>
     </div>
     <div id="navigation-left">
-        <img src="./img/nav-left/shopping-cart.png" alt="shop">
-        <img src="./img/nav-left/settings.png" alt="settings">
+        <img onclick="openShop()" src="./img/nav-left/shopping-cart.png" alt="shop">
+        <img onclick="openSettings()" src="./img/nav-left/settings.png" alt="settings">
         <img onclick="openStats()" src="./img/nav-left/stats.png" alt="stats">
         <img onclick="openCalendar()" src="./img/nav-left/daily-rewards.png" alt="daily-rewards">
         <img onclick="openWheel()" src="./img/nav-left/spin.png" alt="spin">

@@ -151,6 +151,7 @@ let xp = 0;
 
 //Luck
 let luck = 1
+let petLuck = 0
 let megaluck = 1
 
 //stats
@@ -172,7 +173,7 @@ function rollStart() {
             spin.play()
             rng = Math.ceil(Math.random() * 1000)
             console.log("rng:" + rng)
-            rng+= luck + 4 * megaluck 
+            rng+= luck + 4 * megaluck + petLuck
             console.log("rng:" + rng)
             if (rng >= 0 && rng <= 400) {
                 value = 1
@@ -248,7 +249,6 @@ function rollStart() {
         money += Math.ceil(parseInt(money) + value + Math.pow(lvl, value))
         moneyElem.innerHTML = money
         rolls++
-        
         document.getElementById('luck').innerHTML = luck + "x"
         document.getElementById('xp-count').innerHTML = xp + "/1000 XP"
         document.getElementById('xp-level').innerHTML = "LVL: " + Math.ceil(lvl)
@@ -328,6 +328,7 @@ function rollEgg(idEgg) {
         let rng = Math.ceil(Math.random() * 3)
         if (rng == 1 || rng == 2) {
             items[4].itemCount++
+            petLuck += 2 
         }
         updateInventorySlots()
     }
@@ -400,6 +401,16 @@ function openStats() {
     let click = new Audio("./audio/click.mp3")
     click.play()
 }
+function openShop() {
+    document.getElementById('shop-pop').style.display = "block"
+    let click = new Audio("./audio/click.mp3")
+    click.play()
+}
+function openSettings() {
+    document.getElementById('settings-pop').style.display = "block"
+    let click = new Audio("./audio/click.mp3")
+    click.play()
+}
 
 
 
@@ -407,6 +418,16 @@ function closeStats() {
     let click = new Audio("./audio/click.mp3")
     click.play()
     document.getElementById('stats-pop').style.display = "none"
+}
+function closeShop() {
+    let click = new Audio("./audio/click.mp3")
+    click.play()
+    document.getElementById('shop-pop').style.display = "none"
+}
+function closeSettings() {
+    let click = new Audio("./audio/click.mp3")
+    click.play()
+    document.getElementById('settings-pop').style.display = "none"
 }
 function openCalendar() {
     let click = new Audio("./audio/click.mp3")
