@@ -9,51 +9,50 @@ let wow = new Audio("./audio/wow.mp3")
 let swipe = new Audio("./audio/swipe.mp3")
 
 function playNavSound() {
-    let swipe = new Audio('./audio/swipe.mp3');
-    swipe.play();
+    playSwipeSound();
 }
 
 // Items
 let items = [
     {
       "id": 0,
-      "name": "Health Potion",
+      "name": "Health Potion (Slightly increases money)",
       "icon": "./img/potions/red.png",
       "itemCount": 2,
       "function": "useHealth()"
     },
     {
       "id": 1,
-      "name": "Mana Potion",
+      "name": "Mana Potion (Slightly increases XP)",
       "icon": "./img/potions/blue.png",
       "itemCount": 3,
       "function": "useMana()"
     },
     {
       "id": 2,
-      "name": "Mega Potion",
+      "name": "Mega Potion (Increases Megaluck by +1x)",
       "icon": "./img/potions/mega.png",
       "itemCount": 4,
       "function": "useMega()"
     },
     {
       "id": 3,
-      "name": "Luck Potion",
+      "name": "Luck Potion (Increases Luck by +2x)",
       "icon": "./img/potions/green.png",
       "itemCount": 2,
       "function": "useLuck()"
     },
     {
       "id": 4,
-      "name": "Golden Dog",
+      "name": "Golden Dog (Increases Pet Luck by +2x)",
       "icon": "./img/Pets/golden-dog.png",
       "itemCount": 0
     },
     {
       "id": 5,
-      "name": "XP Potion",
+      "name": "XP Potion (Boost current XP)",
       "icon": "./img/potions/yellow (1).png",
-      "itemCount": 5,
+      "itemCount": 1000,
       "function": "useXP()"
     }
     ,
@@ -168,9 +167,8 @@ function rollStart() {
     document.getElementById('overlay').style.opacity = "0.8"
     document.getElementById('roll-btn').disabled = true
     for (let index = 0; index < 20; index++) {
-        let spin = new Audio("./audio/spin.mp3")
         setTimeout(() => {
-            spin.play()
+            playSpinSound();
             rng = Math.ceil(Math.random() * 1000)
             console.log("rng:" + rng)
             rng+= luck + 4 * megaluck + petLuck
@@ -260,9 +258,74 @@ function rollStart() {
     
 }
 
+function startTutorial() {
+      document.getElementById('overlay').style.visibility = "visible"
+      document.getElementById('overlay').style.opacity = "0.9"
+      document.getElementById('navigation').style.zIndex = "-1"
+      document.getElementById('image-block').style.zIndex = "-1"
+      document.getElementById('roll-btn').disabled = true
+
+        document.getElementById('tut-story').innerHTML = "Welcome to the Loot RNG!"
+        setTimeout(() => {
+            document.getElementById('tut-story').innerHTML = "This is the Main Page!"     
+            document.getElementById('tut-image').src = "./img/nav/lucky.png"     
+            
+        }, 1600);
+        setTimeout(() => {
+            document.getElementById('tut-story').innerHTML = "Here You can Roll the Cube to get Money!"     
+        }, 5600);
+
+        setTimeout(() => {
+            document.getElementById('tut-story').innerHTML = "Speaking of Money there is also the Egg Shop!"     
+            document.getElementById('tut-image').src = "./img/nav/egg.png"     
+        }, 8600);
+        setTimeout(() => {
+            document.getElementById('tut-story').innerHTML = "You can buy Eggs to get Pets!"     
+        }, 11600);
+        setTimeout(() => {
+            document.getElementById('tut-story').innerHTML = "Pets Increase your Luck permanently They wont go away on a rebirth!"     
+        }, 14600);
+        setTimeout(() => {
+            document.getElementById('tut-story').innerHTML = "Now lets go to the Inventory!"     
+            document.getElementById('tut-image').src = "./img/nav/backpack.png"     
+        }, 17000);
+        setTimeout(() => {
+            document.getElementById('tut-story').innerHTML = "You can use Items to get more Money or XP!"     
+        }, 20000);
+        setTimeout(() => {
+            document.getElementById('tut-story').innerHTML = "You can also use Eggs to get Pets! or Keys to get more Eggs!"     
+        }, 23000);
+        setTimeout(() => {
+            document.getElementById('tut-story').innerHTML = "Also dont forget to claim your Daily Reward!"     
+        }, 26000);
+        setTimeout(() => {
+            document.getElementById('tut-story').innerHTML = "Now for the explore Page!"     
+            document.getElementById('tut-image').src = "./img/nav/sword.png"     
+        }, 28000);
+        setTimeout(() => {
+            document.getElementById('tut-story').innerHTML = "Simply click the Key to get a level based amount of Eggs!"        
+        }, 31000);
+        setTimeout(() => {
+            document.getElementById('tut-story').innerHTML = "Also dont use the Key on low levels! Im sure you will find your way around!"        
+        }, 34000);
+        setTimeout(() => {
+            
+            document.getElementById('tut-image').src = ""     
+            document.getElementById('tut-story').innerHTML = ""        
+            document.getElementById('overlay').style.visibility = "hidden"
+            document.getElementById('overlay').style.opacity = "0"
+            document.getElementById('roll-btn').disabled = false
+            document.getElementById('navigation').style.zIndex = "1000"
+            document.getElementById('image-block').style.zIndex = "1000"
+        }, 38000);
+
+      
+
+      
+}
+
 function useHealth() {
-    let use = new Audio("./audio/use.mp3")
-    use.play()
+   playUseSound()
     if (items[0].itemCount >= 1) {
         items[0].itemCount--
         money +=  Math.ceil(parseInt(money) + 3 + Math.pow(lvl, 3)) * 10
@@ -272,8 +335,7 @@ function useHealth() {
     }
 }
 function useMana() {
-     let use = new Audio("./audio/use.mp3")
-    use.play()
+     playUseSound()
     if (items[1].itemCount >= 1) {
         items[1].itemCount--
         xp += Math.ceil((lvl * 120) + 100)
@@ -283,8 +345,7 @@ function useMana() {
     }
 }
 function useMega() {
-     let use = new Audio("./audio/use.mp3")
-    use.play()
+     playUseSound()
     if (items[2].itemCount >= 1) {
         items[2].itemCount--
         document.getElementById('luck').innerHTML = luck + "x"
@@ -297,8 +358,7 @@ function useMega() {
     }
 }
 function useLuck() {
-     let use = new Audio("./audio/use.mp3")
-    use.play()
+     playUseSound()
     if (items[3].itemCount >= 1) {
         items[3].itemCount--
         document.getElementById('luck').innerHTML = luck + "x"
@@ -310,8 +370,7 @@ function useLuck() {
     }
 }
 function useXP() {
-     let use = new Audio("./audio/use.mp3")
-    use.play()
+    playUseSound()
     if (items[5].itemCount >= 1) {
         items[5].itemCount--
         xp += Math.ceil((lvl * 220) + 500)
@@ -321,8 +380,7 @@ function useXP() {
     }
 }
 function rollEgg(idEgg) {
-     let use = new Audio("./audio/use.mp3")
-    use.play()
+    playUseSound()
     if (items[idEgg].itemCount >= 1) {
         items[idEgg].itemCount--
         let rng = Math.ceil(Math.random() * 3)
@@ -347,8 +405,7 @@ function exploreStart() {
         items[4].itemCount += lvl;
         foundKey = true;
         setTimeout(() => {
-            let chest = new Audio("./audio/chest.mp3")
-        chest.play()
+            playChestkSound();
         }, 2000);
     }
     if (planet == "vip" && items[13].itemCount >= 1) {
@@ -398,67 +455,89 @@ function exploreStart() {
 
 function openStats() {
     document.getElementById('stats-pop').style.display = "block"
-    let click = new Audio("./audio/click.mp3")
-    click.play()
+    playClickSound()
 }
 function openShop() {
     document.getElementById('shop-pop').style.display = "block"
-    let click = new Audio("./audio/click.mp3")
-    click.play()
+    playClickSound()
 }
 function openSettings() {
     document.getElementById('settings-pop').style.display = "block"
-    let click = new Audio("./audio/click.mp3")
-    click.play()
+     playClickSound()
+}
+function openLevel(){
+    document.getElementById('lvl-pop').style.display = "block"
+     playClickSound()
+}
+function openRebirth() {
+    document.getElementById('rebirth-pop').style.display = "block"
+    if( lvl >= 0 && lvl < 5){
+        document.getElementById('key-reward').src = `./img/gui/X 2nd Outline 256px.png`
+    }
+    if( lvl >= 5 && lvl < 10){
+        document.getElementById('key-reward').src = `./img/key/keyBlue.png`
+    }
+    if( lvl >= 10 && lvl < 15){
+        document.getElementById('key-reward').src = `./img/key/keyGold.png`
+    }
+    if( lvl >= 15){
+        document.getElementById('key-reward').src = `./img/key/keyBlack.png`
+    }
+    playClickSound()
 }
 
 
 
 function closeStats() {
-    let click = new Audio("./audio/click.mp3")
-    click.play()
+    playClickSound()
     document.getElementById('stats-pop').style.display = "none"
 }
+
+function closeRebirth() {
+    playClickSound()
+    document.getElementById('rebirth-pop').style.display = "none"
+}
+
+function closeLevel() {
+     playClickSound()
+    document.getElementById('lvl-pop').style.display = "none"
+}
 function closeShop() {
-    let click = new Audio("./audio/click.mp3")
-    click.play()
+    playClickSound()
     document.getElementById('shop-pop').style.display = "none"
 }
 function closeSettings() {
-    let click = new Audio("./audio/click.mp3")
-    click.play()
+     playClickSound()
     document.getElementById('settings-pop').style.display = "none"
 }
 function openCalendar() {
-    let click = new Audio("./audio/click.mp3")
-    click.play()
+    playClickSound()
     document.getElementById('daily-pop').style.display = "block"
 }
 
 
 function closeCalendar() {
     let click = new Audio("./audio/click.mp3")
-    click.play()
+     playClickSound()
     document.getElementById('daily-pop').style.display = "none"
 }
 function openWheel() {
     let click = new Audio("./audio/click.mp3")
-    click.play()
+     playClickSound()
     document.getElementById('spinning-pop').style.display = "block"
 }
 
 
 function closeWheel() {
     let click = new Audio("./audio/click.mp3")
-    click.play()
+     playClickSound()
     document.getElementById('spinning-pop').style.display = "none"
 }
 
 let phi = 0;
 let state = 0;
 function spinWheel() {
-    let roll = new Audio("./audio/roll.mp3")
-    roll.play()
+    playRollSound();
     if (state === 0) {
         state = 1;
         phi += Math.ceil(Math.random() * 8000) + 3000;
@@ -492,8 +571,114 @@ function spinWheel() {
     
 
 }
+function playClickSound() {
+    let click = new Audio("./audio/click.mp3");
+    click.volume = document.getElementById('sfx-range').value / 100;
+    if (document.getElementById('sfx-toggle').checked) {
+        click.play();
+    }
+}
+function playSpinSound() {
+    let spin = new Audio("./audio/spin.mp3");
+    spin.volume = document.getElementById('sfx-range').value / 100;
+    if (document.getElementById('sfx-toggle').checked) {
+        spin.play();
+    }
+}
+function playRollSound() {
+    let roll = new Audio("./audio/roll.mp3");
+    roll.volume = document.getElementById('sfx-range').value / 100;
+    if (document.getElementById('sfx-toggle').checked) {
+        roll.play();
+    }
+}
+
+function playUseSound() {
+    let use = new Audio("./audio/use.mp3");
+    use.volume = document.getElementById('sfx-range').value / 100;
+    if (document.getElementById('sfx-toggle').checked) {
+        use.play();
+    }
+}
+function playChestSound() {
+    let chest = new Audio("./audio/chest.mp3");
+    chest.volume = document.getElementById('music-range').value / 100;
+    if (document.getElementById('music-toggle').checked) {
+        chest.play();
+    }
+}
+function playSwipeSound() {
+    let swipe = new Audio("./audio/swipe.mp3");
+    swipe.volume = document.getElementById('sfx-range').value / 100;
+    if (document.getElementById('sfx-toggle').checked) {
+        swipe.play();
+    }
+}
+
+let counterR = 0;
+function UpgradeRank(){
+    console.log(counterR)
+    console.log(lvl)
+    if(lvl >= 5 && counterR == 0){
+        counterR++;
+        luck += 10
+        document.getElementById('rankImg').src = `./img/gui/3.png`
+        playUseSound()
+    }else if(lvl >= 10 && counterR == 1){
+        document.getElementById('rankImg').src = `./img/gui/2.png`
+        luck += 30
+        playUseSound()
+    }else{
+    document.getElementById('upgrade-btn').innerHTML = "Not Ready yet!"
+    document.getElementById('upgrade-btn').style = "background-color: grey;"
+        let timeoutId = setTimeout(() => {
+            document.getElementById('upgrade-btn').innerHTML = "UPGRADE"
+            document.getElementById('upgrade-btn').style = "background-color:rgb(10, 228, 10)"
+            clearTimeout(timeoutId);
+        }, 900);
+
+    }
+}
+
+function Rebirth(){
+    closeRebirth()
+    playUseSound()
+    document.getElementById('rankImg').src = `./img/gui/1.png`
+    money = 0
+    xp = 0
+    lvl = 0
+    luck = 1
+    megaluck = 1
+    document.getElementById('money').innerHTML = money
+    document.getElementById('luck').innerHTML = luck + "x"
+    document.getElementById('megaluck').innerHTML = megaluck + "x"
+    document.getElementById('xp-count').innerHTML = xp + "/1000 XP"
+    document.getElementById('bar-empty').style.width = "0px"
+    document.getElementById('xp-level').innerHTML = "LVL: " + Math.ceil(lvl)
+//repoint keys
+     if( lvl >= 0 && lvl < 5){
+        document.getElementById('key-reward').src = `./img/gui/X 2nd Outline 256px.png`
+    }
+    if( lvl >= 5 && lvl < 10){
+        items[12].itemCount++
+        document.getElementById('key-reward').src = `./img/key/keyBlue.png`
+    }
+    if( lvl >= 10 && lvl < 15){
+    items[13].itemCount++
+        document.getElementById('key-reward').src = `./img/key/keyGold.png`
+    }
+    if( lvl >= 15){
+    items[14].itemCount++
+        document.getElementById('key-reward').src = `./img/key/keyBlack.png`
+    }
+}
 
 function updateState() {
+    if(document.getElementById('sfx-toggle').checked == false){
+    wow.muted = true
+    spin.muted = true
+    }
+
     if(xp >= 1000){
         xp = 0;
         lvl++
@@ -603,7 +788,7 @@ function updateInventorySlots() {
             let slot = document.getElementById(`${slotIndex}_inv`);
             if (slot) {
                 slot.innerHTML = `
-                    <img onclick="${items[i].function}" src="${items[i].icon}" class="item-icon" />
+                    <img onclick="${items[i].function}" src="${items[i].icon}" class="item-icon" title="${items[i].name}" />
                     <span class="item-count">${items[i].itemCount}</span>
                 `;
                 slotIndex++;
@@ -614,8 +799,7 @@ function updateInventorySlots() {
 
 function buyEggs(idBuy , price , color){
     if(money >= price){
-        let click = new Audio("./audio/click.mp3")
-        click.play()
+        playClickSound();
         money -= price
         document.getElementById('money').innerHTML = money
         items[idBuy].itemCount++
@@ -661,8 +845,7 @@ function buyEggs(idBuy , price , color){
 
 function updateSlider(){
     if(counterSlider == 0){
-        let click = new Audio("./audio/click.mp3")
-    click.play()
+    playClickSound()
         document.getElementById('planet1').src = `./img/planets/hell.png`
         document.getElementById('planet2').src = `./img/planets/vip.png`
         document.getElementById('planet3').src = `./img/planets/normal.png`
@@ -670,8 +853,7 @@ function updateSlider(){
         planet = "vip"
     }
     if(counterSlider == 1){
-        let click = new Audio("./audio/click.mp3")
-    click.play()
+    playClickSound()
         document.getElementById('planet1').src = `./img/planets/normal.png`
         document.getElementById('planet2').src = `./img/planets/hell.png`
         document.getElementById('planet3').src = `./img/planets/vip.png`
@@ -680,8 +862,7 @@ function updateSlider(){
         
     }
     if(counterSlider == 2){
-        let click = new Audio("./audio/click.mp3")
-    click.play()
+    playClickSound()
         document.getElementById('planet1').src = `./img/planets/vip.png`
         document.getElementById('planet2').src = `./img/planets/normal.png`
         document.getElementById('planet3').src = `./img/planets/hell.png`

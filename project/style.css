@@ -687,3 +687,88 @@ body {
     bottom: 0;
     left: 3px;
 }
+
+#sfx-toggle , #music-toggle{
+    position: absolute;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+   background-color: #eee
+   ;
+}
+
+.settings-list div{
+    display: flex;
+    height: 20%;
+    justify-content: center;
+    align-items: center;
+}
+.settings-list .volume{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    height: 20%;
+    justify-content: center;
+    align-items: center;
+}
+
+#sfx-toggle,
+#music-toggle {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 2px solid #333;
+    border-radius: 6px;
+    background: #eee;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    position: absolute;
+    right: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    outline: none;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#sfx-toggle:checked,
+#music-toggle:checked {
+    background: #11d940;
+    border-color: #11d940;
+}
+
+#sfx-toggle:checked::after,
+#music-toggle:checked::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+    pointer-events: none;
+}
+
+#upgrade-btn{
+    font-weight: bolder;
+    text-align: center;
+    color: white;
+    justify-self: center;
+    width: 100px;
+    border: 3px solid #000;
+    border-radius: 10px;
+    background-color: rgb(10, 228, 10);
+}
+#rebirth-btn{
+    font-weight: bolder;
+    text-align: center;
+    color: white;
+    justify-self: center;
+    width: 100px;
+    border: 3px solid #000;
+    border-radius: 10px;
+    background-color: rgb(228, 10, 224);
+}

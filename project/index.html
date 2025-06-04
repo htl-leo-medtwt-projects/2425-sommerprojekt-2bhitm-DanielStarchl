@@ -10,6 +10,10 @@
 </head>
 <body onload="generateInventory()">
     <div id="window1" style="width: 100vw;">
+        <div style="display: flex; justify-content: center; position: absolute; top: 0; left: 0; width: 100vw; height: 100vh;">
+            <h2 id="tut-story" style="transition: transform 0.3s ease-in-out; color: white; position: absolute;top: 200px; z-index: 30000; text-align: center;"></h2>
+            <img style="transition: transform 0.3s ease-in-out; width: 100px; color: white; position: absolute; top: 300px; z-index: 30000; text-align: center;" id="tut-image" src="" alt="">
+        </div>
         <div id="overlay">
         </div>
         <!--Stats-->
@@ -142,10 +146,34 @@
                             <h2>Settings</h2>
                             <br>
                             <hr>
-                            <h3 style="text-align: center;; margin-top: -25px; margin-bottom: 40px; color: rgba(156, 154, 154, 0.748);" id="timer-wheel"></h3>
+                            <br>
+                            <div class="settings-list">
+                               <div><h4 style="color: white;">SFX</h4>
+                                <div class="switch">
+                                    <input type="checkbox" id="sfx-toggle" checked>
+                                    <label for="sfx-toggle"></label>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="volume"><h4 style="color: white;">Music</h4>
+                                <div class="switch">
+                                    <input type="checkbox" id="music-toggle" checked>
+                                    <label for="music-toggle"></label>
+                                </div>
+                            </div>
+                            <div class="volume">
+                                <h4 style="color: white;">SFX</h4>
+                                <input type="range" name="" id="sfx-range" min="0" max="100" value="100">
+                            </div>
+                            <div class="volume">
+                                <h4 style="color: white;">Music</h4>
+                                <input type="range" name="" id="music-range" min="0" max="100" value="100">
+                            </div>
+                            </div>
+                                </div>
                         </div>
                     </div>
-                </div>
+                <!--SHOP-->
                 <div style="display: none;" id="shop-pop">
                     <div onclick="closeShop()" class="bg-filter"></div>
                     <div class="align-pop">
@@ -154,7 +182,44 @@
                             <h2>Shop</h2>
                             <br>
                             <hr>
-                            <h3 style="text-align: center;; margin-top: -25px; margin-bottom: 40px; color: rgba(156, 154, 154, 0.748);" id="timer-wheel"></h3>
+                            <h2 style="font-size: 40px; -webkit-text-stroke: black 2px;">Shop not Supporting Payment</h2>
+                        </div>
+                    </div>
+                </div>
+            <!--LVL UP-->
+                <div style="display: none;" id="lvl-pop">
+                    <div onclick="closeLevel()" class="bg-filter"></div>
+                    <div class="align-pop">
+                        <div class="pop-up">
+                            <img onclick="closeLevel()" class="xcancel" src="./img/gui/X 2nd Outline 256px.png" alt="">
+                            <h2>Rank UP</h2>
+                            <br>
+                            <hr>
+                           <h3 style="text-align: center; margin-top: 20px; color: white;">Rank up Your character for extra Luck</h3>
+                           <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+                               <img id="rankImg" style="width: 100px;" src="./img/gui/1.png" alt="rank"></div>
+                               <h2 style="font-size: 40px; -webkit-text-stroke: black 2px;">Your Rank</h2>
+                               <div onclick="UpgradeRank()" id="upgrade-btn">UPGRADE</div>
+                               <h4 style="text-align: center; margin-top: 2px; color: rgb(174, 174, 174);">(Resets on Rebirth)</h4>
+                        </div>
+                    </div>
+                </div>
+                <!--Rebirth-->
+                <div style="display: none;" id="rebirth-pop">
+                    <div onclick="closeRebirth()" class="bg-filter"></div>
+                    <div class="align-pop">
+                        <div class="pop-up">
+                            <img onclick="closeRebirth()" class="xcancel" src="./img/gui/X 2nd Outline 256px.png" alt="">
+                            <h2>Rebirth</h2>
+                            <br>
+                            <hr>
+                            <div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+                               <img id="rankImg" style="width: 100px;" src="./img/gui/rebirth2.png" alt="rank">
+                               <img style="width: 50px;" src="./img/gui/trade.png" alt="rank">
+                               <img id="key-reward" style="width: 100px;" src="./img/key/keyBlue.png" alt="rank">
+                            </div>
+                               <div onclick="Rebirth()" id="rebirth-btn">Rebirth</div>
+                               <h4 style="text-align: center; margin-top: 2px; color: rgb(174, 174, 174);">(Resets Luck, Level, Money and Rank)</h4>
                         </div>
                     </div>
                 </div>
@@ -176,6 +241,7 @@
         </div>
         </div>
     </div>
+
     <div id="navigation-left">
         <img onclick="openShop()" src="./img/nav-left/shopping-cart.png" alt="shop">
         <img onclick="openSettings()" src="./img/nav-left/settings.png" alt="settings">
@@ -184,9 +250,9 @@
         <img onclick="openWheel()" src="./img/nav-left/spin.png" alt="spin">
     </div>
     <div id="navigation-right">
-        <img src="./img/nav-left/quests.png" alt="quests">
-        <img src="./img/nav-left/upgrade.png" alt="boost">
-        <img src="./img/nav-left/rebirth.png" alt="rebirths">
+        <img onclick="startTutorial()" src="./img/nav-left/quests.png" alt="tut">
+        <img onclick="openLevel()" src="./img/nav-left/upgrade.png" alt="boost">
+        <img onclick="openRebirth()" src="./img/nav-left/rebirth.png" alt="rebirths">
     </div>
         <div id="block">
             <h1 id="rarity">Rarity</h1>
@@ -195,12 +261,14 @@
     <div class="align">      
         <div onclick="rollStart()" id="roll-btn">ROLL !</div>
     </div>
-    <div class="align">
-        <div id="navigation">
-            <img onclick="playNavSound(); location.hash='window1'" src="./img/nav/lucky.png" alt="lucky-block">
-            <img onclick="playNavSound(); location.hash='window2'" src="./img/nav/egg.png" alt="lucky-block">
-            <img onclick="playNavSound(); location.hash='window3'" src="./img/nav/backpack.png" alt="lucky-block">
-            <img onclick="playNavSound(); location.hash='window4'" src="./img/nav/sword.png" alt="lucky-block">
+    
+</div>
+<div class="align">
+    <div id="navigation">
+        <img id="tut-main" onclick="playNavSound(); location.hash='window1'" src="./img/nav/lucky.png" alt="lucky-block">
+        <img id="tut-2" onclick="playNavSound(); location.hash='window2'" src="./img/nav/egg.png" alt="lucky-block">
+        <img id="tut-3" onclick="playNavSound(); location.hash='window3'" src="./img/nav/backpack.png" alt="lucky-block">
+        <img id="tut-4" onclick="playNavSound(); location.hash='window4'" src="./img/nav/sword.png" alt="lucky-block">
     </div>
 </div>
 </div>
